@@ -1,13 +1,16 @@
 import express from "express"
 import bodyParser from 'body-parser'
-import cors from 'cors'
 import movies from './movies.json' assert { type: "json" };
+import cors from 'cors'
 
 const app = express();
-app.use(cors());
 const port = process.env.PORT || 5000
+app.use(cors({
+    origin: port,
+    method : ['GET', 'PUT', 'PATCH', 'DELETE']
+}));
 
-app.use(bodyParser.json()); 
+
 app.get( "/", (req, res) =>  res.send('hello from homepage')
 )
 app.get("/movies", (req, res) => {
