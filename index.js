@@ -6,10 +6,17 @@ const app = express();
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.options('*', cors());
+router.get('/', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true); // If needed
 
+    res.send('cors problem fixed:)');
+});
 
-app.get("/", (req, res) => res.send("hello from homepage"));
-app.get("/movies", (req, res, next) => {
+app.head("/",cors(), (req, res) => res.send("hello from homepage"));
+app.get("/movies",cors(), (req, res, next) => {
   res.json(movies);
 });
 
