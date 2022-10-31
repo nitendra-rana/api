@@ -10,7 +10,7 @@ app.options('*', cors());
 
 app.get("/", (req, res) => res.send("hello from homepage"));
 app.get("/movies", (req, res, next) => {
-  res.send(movies);
+  res.json(movies);
 });
 
 app.listen(port, () => console.log(`server is running at ${port}`));
