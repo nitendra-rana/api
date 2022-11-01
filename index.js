@@ -5,11 +5,14 @@ import cors from "cors";
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(cors({
+  origin: '*'
+}));
 app.head("/",cors(), (req, res) => res.send("hello from homepage"));
 app.get("/movies.json",cors({
   origin: true
 }), (req, res, next) => {
-  res.json(JSON.stringify(movies));
+  res.send(movies);
   next();
 });
 
