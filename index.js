@@ -3,16 +3,18 @@ import movies from "./movies.json" assert { type: "json" };
 import cors from "cors";
 
 const app = express();
-const port = process.env.PORT || 5000;
-
+app.use(express.json());
 app.use(cors({
   origin: '*'
 }));
+const port = process.env.PORT || 5000;
+
+
 app.head("/",cors(), (req, res) => res.send("hello from homepage"));
-app.get("/movies.json",cors({
+app.get("/movies",cors({
   origin: true
 }), (req, res, next) => {
-  res.send(movies);
+  res.status(200).json(movies);
   next();
 });
 
